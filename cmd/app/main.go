@@ -12,6 +12,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/spf13/viper"
 	"github.com/vcnt72/golang-boilerplate/config"
+	"github.com/vcnt72/golang-boilerplate/db"
 	"go.uber.org/zap"
 )
 
@@ -22,6 +23,8 @@ func main() {
 	defer logger.Sync()
 	config.Init()
 	g := gin.Default()
+
+	db.NewConnection()
 
 	port := viper.GetString("server.port")
 
