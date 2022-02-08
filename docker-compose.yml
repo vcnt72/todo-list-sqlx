@@ -1,0 +1,9 @@
+version: "3"
+services:
+  main:
+    build:
+      dockerfile: Dockerfile
+      context: ""
+    image: changeme
+    container_name: changeme
+    restart: always
