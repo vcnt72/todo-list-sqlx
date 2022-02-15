@@ -11,8 +11,9 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/spf13/viper"
-	"github.com/vcnt72/golang-boilerplate/config"
-	"github.com/vcnt72/golang-boilerplate/db"
+	"github.com/vcnt72/todo-list-sqlx/config"
+	"github.com/vcnt72/todo-list-sqlx/db"
+	"github.com/vcnt72/todo-list-sqlx/handler"
 	"go.uber.org/zap"
 )
 
@@ -24,9 +25,11 @@ func main() {
 	config.Init()
 	g := gin.Default()
 
-	db.NewConnection()
+	conn := db.NewConnection()
 
 	port := viper.GetString("server.port")
+
+	handler.New(g, conn)
 
 	srv := http.Server{
 		Addr:    ":" + port,
